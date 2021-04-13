@@ -1,0 +1,23 @@
+.LiveCam__container {
+    margin-top: 2rem;
+}
+
+.col-center {
+    text-align: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+th {
+    padding: .5rem 1rem
+}
+
+#container360 {
+    height: 0px; width: 0px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); cursor: grab;
+}
+
+.demo-demo {
+    height: 375px;
+    width: 675px;
+    background-color: grey;
+}
