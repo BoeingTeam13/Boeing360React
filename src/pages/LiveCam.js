@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import '../styles/LiveCam.css';
 import Button from 'react-bootstrap/Button';
+import { useSelector } from "react-redux";
 import { Col, Row, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import POITable from "../components/PoiTable";
+
 // import { kaleidoscopejs as Kaleidoscope } from 'kaleidoscopejs';
 
 // const viewer = new Kaleidoscope.Video({
@@ -11,9 +14,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // });
 
 export default function LiveCamera() {
-  console.log('hello im eric')
   const [isClicked, setClicked] = useState(false);
   const [btnText, setBtnText] = useState('Demo');
+  const pois = useSelector((state) => state.pois);
+
+  console.log("pois", pois);
 
   //let module = require('../App.js')
   //var locations = module.locations;
@@ -37,88 +42,6 @@ export default function LiveCamera() {
       setBtnText('Demo');
     }
   };
-
-  const locations = [
-    {
-      id: '1',
-      name: 'Hemmingson Center',
-      latlng: [47.6671, -117.3996],
-      description: ['Main activity center for Gonzaga University'],
-      link: ['https://www.gonzaga.edu/about/offices-services/gonzaga-university-event-service-team/venues/john-j-hemmingson-center']
-    },
-    {
-      id: '2',
-      name: 'McCarthy Center',
-      latlng: [47.6653, -117.3991],
-      description: ['Gonzaga University Athletic and Gym Center'],
-      link: ['https://gozags.com/facilities/mccarthey-athletic-center/1']
-    },
-    {
-      id: '3',
-      name: 'Zag Shop',
-      latlng: [47.6677, -117.3977],
-      description: ['Official Gonzaga University Store'],
-      link: ['https://www.bkstr.com/gonzagazagshopstore/home']
-    }
-  ];
-  
-  //experimenting with locations with logs
-  var add_array = []
-  console.log(locations.forEach(function(item, index, array) {
-    var arr = Object.values(item);
-    add_array.push(arr)
-    console.log('name:' + arr[1], index)
-    console.log('description:' + arr[3], index)
-    console.log('link:' + arr[4], index)
-  }));
-  console.log(add_array)
-  const showPOI = () => {
-      console.log('I was triggered during render')
-  };
-
-function generate_table() {
-  // get the reference for the body
-  var body = document.getElementsByTagName("body")[0];
-
-  // creates a <table> element and a <tbody> element
-  var tbl = document.createElement("table");
-  var tblBody = document.createElement("tbody");
-
-  // creating all cells
-  for (var i = 0; i < locations.length; i++) {
-    // creates a table row
-    var row = document.createElement("tr");
-    var poi = locations[i];
-
-    for (var j = 0; j < 3; j++) {
-      // Create a <td> element and a text node, make the text
-      // node the contents of the <td>, and put the <td> at
-      // the end of the table row
-      var cell = document.createElement("td");
-      var cell2 = document.createElement("td");
-      var cellText = document.createTextNode("Name: "+poi.name);
-      var cellText3 = document.createTextNode("\nLink: " + poi.link + "\n")
-      if(j === 1)
-        cell.appendChild(cellText);
-      if(j === 2)
-        cell2.appendChild(cellText3);
-      row.appendChild(cell);
-      row.appendChild(cell2);
-    }
-    var cellText2 = document.createTextNode("\nDescription: "+poi.description)
-    cell.append(cellText2);
-    
-    // add the row to the end of the table body
-    tblBody.appendChild(row);
-  }
-
-  // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tbl);
-  // sets the border attribute of tbl to 2;
-  tbl.setAttribute("border", "2");
-}
 
   // const displayDemo = () => {
   //   var containerSelector = '#container360';
@@ -155,16 +78,7 @@ function generate_table() {
         <Row>
           <Col className='col-center'>
             <p>Dynamic POI Table</p>{' '}
-            <Button onClick={generate_table}></Button>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Name:</th>
-                  <th>Description:</th>
-                  {/* <th>Link:</th> */}
-                </tr>
-              </tbody>
-            </table>
+            <POITable pois={pois} />
           </Col>
           <Col className='col-center'>
             {isClicked ? (

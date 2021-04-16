@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 import homeImage from '../media/homeImg.png';
 import Button from 'react-bootstrap/Button';
+
 import { Col, Row, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
