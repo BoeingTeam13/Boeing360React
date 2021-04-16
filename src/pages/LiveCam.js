@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import '../styles/LiveCam.css';
 import Button from 'react-bootstrap/Button';
+import { useSelector } from "react-redux";
 import { Col, Row, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import POITable from "../components/PoiTable";
+
 // import { kaleidoscopejs as Kaleidoscope } from 'kaleidoscopejs';
 
 // const viewer = new Kaleidoscope.Video({
@@ -13,6 +16,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function LiveCamera() {
   const [isClicked, setClicked] = useState(false);
   const [btnText, setBtnText] = useState('Demo');
+  const pois = useSelector((state) => state.pois);
+
+  console.log("pois", pois);
 
   // var viewer = new Kaleidoscope.Video({
   //   source: 'equirectangular-video.mp4',
@@ -70,14 +76,7 @@ export default function LiveCamera() {
         <Row>
           <Col className='col-center'>
             <p>Dynamic POI Table</p>{' '}
-            <table>
-              <tbody>
-                <tr>
-                  <th>Name:</th>
-                  <th>Description:</th>
-                </tr>
-              </tbody>
-            </table>
+            <POITable pois={pois} />
           </Col>
           <Col className='col-center'>
             {isClicked ? (
