@@ -119,7 +119,7 @@ app.get('/live-cams', function (req, res) {
   res.render('live-cams', {});
 });
 
-app.get('/live-maps', function (req, res) {
+app.get('/live-map', function (req, res) {
   Poi.find({}, function (err, foundPois) {
     if (foundPois.length === 0) {
       Poi.insertMany(locations, function (err) {
@@ -129,9 +129,9 @@ app.get('/live-maps', function (req, res) {
           console.log('Successfully added default items');
         }
       });
-      res.redirect('/live-maps');
+      res.redirect('/live-map');
     } else {
-      res.render('live-maps', { pois: JSON.stringify(foundPois) });
+      res.render('live-map', { pois: JSON.stringify(foundPois) });
     }
   });
 });

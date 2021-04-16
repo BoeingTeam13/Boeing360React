@@ -3,17 +3,17 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../styles/LiveMap.css';
 
 export default function LiveMap() {
-  const position = [51.505, -0.09];
+  const position = [47.6670, -117.4014];
   return (
     <div id='mapid'>
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+      <MapContainer center={position} zoom={13}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
-        <Marker position={[51.505, -0.09]}>
+        <Marker position={position}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            Here
           </Popup>
         </Marker>
       </MapContainer>

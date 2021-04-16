@@ -1,6 +1,15 @@
 #mapid { 
-    height: 40rem; 
+    height: 50%; 
+    width: 50%;
+    z-index: 1;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.leaflet-container{
     width: 50rem;
-    margin: 0 auto;
-    z-index: 100000;
+    height: 30rem;
 }
