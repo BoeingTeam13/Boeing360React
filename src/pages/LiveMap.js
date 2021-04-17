@@ -13,6 +13,12 @@ var map;
 export default function LiveMap() {
   const pois = useSelector((state) => state.pois)
 
+  function restartSim(){
+    clearInterval(interval);
+    long = -117.409321;
+    runSim();
+  }
+
   var interval;
   function runSim(){
     interval = setInterval(update, 1000);
@@ -22,8 +28,7 @@ export default function LiveMap() {
           clearInterval(interval);
           return;
       }
-      long += 0.000150;
-      console.log(long)
+      long += 0.000350;
       if (map.hasLayer(circle)){
         circle.remove();
       }
@@ -66,6 +71,9 @@ export default function LiveMap() {
           />
           <MyComponent/>
         </MapContainer>
+      </div>
+      <div id='Button'>
+        <button onClick={restartSim}>Re-Run Sim</button>
       </div>
     </>
   );
