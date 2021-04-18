@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
 import '../styles/LiveCam.css';
 import Button from 'react-bootstrap/Button';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import POITable from "../components/PoiTable";
-
-// import { kaleidoscopejs as Kaleidoscope } from 'kaleidoscopejs';
-
-// const viewer = new Kaleidoscope.Video({
-//   source: 'equirectangular-video.mp4',
-//   containerId: '#target',
-// });
+import POITable from '../components/PoiTable';
+import { viewer, Kaleidoscope } from 'kaleidoscopejs';
 
 export default function LiveCamera() {
-  const [isClicked, setClicked] = useState(false);
+  const [isClicked, setClicked] = useState(true);
   const [btnText, setBtnText] = useState('Demo');
-  const pois = useSelector((state) => state.pois);
+  const pois = useSelector(state => state.pois);
 
-  console.log("pois", pois);
-
-  // var viewer = new Kaleidoscope.Video({
-  //   source: 'equirectangular-video.mp4',
-  //   containerId: '#target',
+  // var viewer = new Kaleidoscope.Image({
+  //   source: 'http://thiago.me/image-360/Polie_Academy_53.JPG',
+  //   containerId: '#container360',
+  //   height: window.innerHeight,
+  //   width: window.innerWidth,
   // });
-  // viewer.render();
+
+  console.log('pois', pois);
 
   // Live-Stream / Demo Button
   const handleClick = () => {
@@ -40,34 +35,6 @@ export default function LiveCamera() {
     }
   };
 
-  // const displayDemo = () => {
-  //   var containerSelector = '#container360';
-  //   this.viewer = new Video({
-  //     source: '/videos/testVideo.mp4',
-  //     containerId: containerSelector,
-  //     // Change the following line from height: window.innerHeight | width: window:innderWidth
-  //     height: 700,
-  //     width: 1000,
-  //   });
-  //   this.viewer.render();
-  //   window.onresize = function () {
-  //     // Change the following line from height: window.innerHeight | width: window:innderWidth
-  //     this.viewer.setSize({
-  //       height: 700,
-  //       width: 1000,
-  //     });
-  //   }.bind(this);
-  //   document
-  //     .querySelector(containerSelector)
-  //     .addEventListener('touchend', this.viewer.play.bind(this.viewer));
-  //   document.body.addEventListener(
-  //     'click',
-  //     function () {
-  //       this.viewer.play();
-  //     }.bind(this)
-  //   );
-  // };
-
   return (
     <div>
       <Container className='LiveCam__container'>
@@ -75,8 +42,7 @@ export default function LiveCamera() {
 
         <Row>
           <Col className='col-center'>
-            <p>Dynamic POI Table</p>{' '}
-            <POITable pois={pois} />
+            <p>Dynamic POI Table</p> <POITable pois={pois} />
           </Col>
           <Col className='col-center'>
             {isClicked ? (
@@ -92,11 +58,6 @@ export default function LiveCamera() {
             ) : (
               <div>
                 <p>Demo</p>
-                {/* {viewer.render()} */}
-                {/* <script>{displayDemo(View)}</script>
-                <div id='container360'>
-                  <canvas width='0' height='0'></canvas>
-                </div> */}
                 <div className='demo-demo'></div>
               </div>
             )}
