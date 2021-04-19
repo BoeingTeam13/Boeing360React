@@ -65,6 +65,26 @@ function Row(props) {
                     <TableCell>{row.latlng}</TableCell>
                   </TableRow>
                 </TableBody>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Description</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow key={row.latlng}>
+                    <TableCell>{row.latlng}</TableCell>
+                  </TableRow>
+                </TableBody>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Link</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow key={row.latlng}>
+                    <TableCell>{row.latlng}</TableCell>
+                  </TableRow>
+                </TableBody>
               </Table>
             </Box>
           </Collapse>

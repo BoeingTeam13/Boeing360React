@@ -42,12 +42,12 @@ export default function LiveCamera() {
 
         <Row>
           <Col className='col-center'>
-            <p>Dynamic POI Table</p> <POITable pois={pois} />
+            <p><font size="+3">Dynamic POI Table</font></p> <POITable pois={pois} />
           </Col>
           <Col className='col-center'>
             {isClicked ? (
               <div>
-                <p>Live Stream</p>
+                <p><font size="+3">Live Stream</font></p>
                 <iframe
                   src='http://192.168.0.42:9001/'
                   frameBorder='1'
@@ -57,7 +57,7 @@ export default function LiveCamera() {
               </div>
             ) : (
               <div>
-                <p>Demo</p>
+                <p><center>Demo</center></p>
                 <div className='demo-demo'></div>
               </div>
             )}

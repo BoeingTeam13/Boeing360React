@@ -83,13 +83,15 @@ export default function LiveMap() {
   return (
     <>
       <Container className='live-map-container'>
+      <h1 style={{ textAlign: 'center' }}>Live Map</h1>
         <Row>
           <Col>
-            <p>Dynamic POI Table</p> <POITable pois={pois} />
+          <p><font size="+3">Dynamic POI Table</font></p> <POITable pois={pois} />
           </Col>
           <Col>
-            <div id='mapid' style={{ marginTop: '20rem' }}>
-              <MapContainer center={[lat, long]} zoom={13}>
+          <p><center><font size="+3">Live Stream</font></center></p>
+            <div id='mapid' style={{ marginTop: '14rem' }}>
+              <MapContainer center={[lat, long]} zoom={14}>
                 <TileLayer
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -97,35 +99,35 @@ export default function LiveMap() {
                 <MyComponent />
               </MapContainer>
             </div>
+          <Row style={{ marginTop: '0rem' }}>
+            <div id='Button' className='mapControls'>
+              <Button
+                className='simBtn1'
+                variant='contained'
+                color='primary'
+                onClick={restartSim}
+              >
+                Run Sim
+              </Button>
+
+              <p style={{ marginTop: '1rem' }}>Search Radius: {sliderValue} meters</p>
+
+              <Slider
+                defaultValue={240}
+                getAriaValueText={valuetext}
+                aria-labelledby='discrete-slider-small-steps'
+                step={20}
+                marks
+                min={200}
+                max={600}
+                valueLabelDisplay='auto'
+                style={{ marginTop: '2rem' }}
+                value={typeof sliderValue === 'number' ? sliderValue : 0}
+                onChange={handleSliderChange}
+              />
+            </div>
+          </Row>
           </Col>
-        </Row>
-        <Row style={{ marginTop: '2rem' }}>
-          <div id='Button' className='mapControls'>
-            <Button
-              className='simBtn1'
-              variant='contained'
-              color='primary'
-              onClick={restartSim}
-            >
-              Run Sim
-            </Button>
-
-            <p style={{ marginTop: '3rem' }}>{sliderValue} meters</p>
-
-            <Slider
-              defaultValue={240}
-              getAriaValueText={valuetext}
-              aria-labelledby='discrete-slider-small-steps'
-              step={20}
-              marks
-              min={200}
-              max={600}
-              valueLabelDisplay='auto'
-              style={{ marginTop: '2rem' }}
-              value={typeof sliderValue === 'number' ? sliderValue : 0}
-              onChange={handleSliderChange}
-            />
-          </div>
         </Row>
       </Container>
     </>
