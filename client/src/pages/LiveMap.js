@@ -21,15 +21,25 @@ export default function LiveMap() {
 
   // Slider value state
   const [sliderValue, setSliderValue] = useState(240);
+  var popup = L.popup();
 
   function restartSim() {
     clearInterval(interval);
     long = -117.409321;
-    runSim();
+    runSim(sliderValue);
   }
 
   function runSim() {
     interval = setInterval(update, 1000);
+  }
+
+  function onMapClick(e) {
+    popup        
+    .setLatLng(e.latlng)
+    //.setContent("Lat Long position: " + e.latlng.toString())
+    .setContent("<b>Popip</b><br>")
+    .openOn(map);
+    //alert("You clicked the map at " + e.latlng);
   }
 
   function update() {
@@ -54,7 +64,7 @@ export default function LiveMap() {
         // var row = document.getElementById(poi.id);
         // row.style.display = 'none';
       } else {
-        markers[poi.id].addTo(map);
+        markers[poi.id].addTo(map).bindPopup("<b>Hello world!</b><br>I am a popup.");
         // var row = document.getElementById(poi.id);
         // row.style.display = '';
       }
@@ -67,6 +77,7 @@ export default function LiveMap() {
     for (var i = 0; i < pois.length; i++) {
       var poi = pois[i];
       markers[poi.id] = L.marker(poi.latlng).bindPopup(poi.name);
+      markers[poi.id].on('click', onMapClick);
     }
     return null;
   }
