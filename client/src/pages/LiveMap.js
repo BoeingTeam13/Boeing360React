@@ -14,6 +14,7 @@ const radius = 200;
 var markers = {};
 var circle;
 var map;
+var group;
 
 export default function LiveMap() {
   const pois = useSelector(state => state.pois);
@@ -21,7 +22,6 @@ export default function LiveMap() {
 
   // Slider value state
   const [sliderValue, setSliderValue] = useState(240);
-  var popup = L.popup();
 
   function restartSim() {
     clearInterval(interval);
@@ -33,15 +33,18 @@ export default function LiveMap() {
     interval = setInterval(update, 1000);
   }
 
-  function onMapClick(e) {
-    popup        
-    .setLatLng(e.latlng)
+  /*function onMapClick(e) {
+    L.popup() 
+    .setLatLng(this.latlng)
     //.setContent("Lat Long position: " + e.latlng.toString())
-    .setContent("<b>Popip</b><br>")
+    .setContent("<b>Popup</b><br>" + poi.name)
     .openOn(map);
-    //alert("You clicked the map at " + e.latlng);
-  }
+  }*/
 
+  function groupClick(event) {
+    console.log('clicked on', event);
+  }
+  
   function update() {
     if (long > -117.396437) {
       clearInterval(interval);
@@ -55,16 +58,18 @@ export default function LiveMap() {
       color: 'red',
       radius: sliderValue,
     }).addTo(map);
+    group = L.featureGroup().addTo(map).on('click', groupClick);
     for (var i = 0; i < pois.length; i++) {
       var poi = pois[i];
       var dist = map.distance(poi.latlng, circle.getLatLng());
       var inSide = dist < circle.getRadius();
+      
       if (!inSide) {
         markers[poi.id].remove();
         // var row = document.getElementById(poi.id);
         // row.style.display = 'none';
       } else {
-        markers[poi.id].addTo(map).bindPopup("<b>Hello world!</b><br>I am a popup.");
+        markers[poi.id].addTo(group).bindPopup("<b>Location</b><br>" + poi.name);
         // var row = document.getElementById(poi.id);
         // row.style.display = '';
       }
@@ -77,7 +82,6 @@ export default function LiveMap() {
     for (var i = 0; i < pois.length; i++) {
       var poi = pois[i];
       markers[poi.id] = L.marker(poi.latlng).bindPopup(poi.name);
-      markers[poi.id].on('click', onMapClick);
     }
     return null;
   }
