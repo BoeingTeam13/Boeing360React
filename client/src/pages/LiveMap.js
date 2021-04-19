@@ -79,6 +79,8 @@ export default function LiveMap() {
 
   function MyComponent() {
     map = useMap();
+
+    //NOTE: Leaflet marker does not function correctly on Safari/Edge browsers. Use chrome
     for (var i = 0; i < pois.length; i++) {
       var poi = pois[i];
       markers[poi.id] = L.marker(poi.latlng).bindPopup(poi.name);
