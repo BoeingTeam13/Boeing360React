@@ -23,10 +23,12 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(name, latlng) {
+function createData(name, latlng, description,link) {
   return {
     name,
     latlng,
+    description,
+    link
   };
 }
 
@@ -71,8 +73,8 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={row.latlng}>
-                    <TableCell>{row.latlng}</TableCell>
+                  <TableRow key={row.description}>
+                    <TableCell>{row.description}</TableCell>
                   </TableRow>
                 </TableBody>
                 <TableHead>
@@ -81,8 +83,8 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow key={row.latlng}>
-                    <TableCell>{row.latlng}</TableCell>
+                  <TableRow key={row.link}>
+                    <TableCell>{row.link}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -105,7 +107,7 @@ Row.propTypes = {
 export default function POITable({ pois }) {
   const rows = []
   pois.map((poi) => {
-    rows.push(createData(poi.name, poi.latlng))
+    rows.push(createData(poi.name, poi.latlng, poi.description, poi.link))
   })
 
   console.log(rows);
